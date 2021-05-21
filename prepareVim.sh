@@ -1,6 +1,9 @@
 #!/bin/bash
 
-#TODO: Install vim
+cd `dirname $0`
+source utils.sh
+
+install_package "vim"
 
 mkdir -p $HOME/.vim/files/swap
 

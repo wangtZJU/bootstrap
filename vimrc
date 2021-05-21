@@ -241,4 +241,4 @@ let g:airline#extensions#tabline#enabled = 1
 
 
 "" Add custom config in ~/.vimrc.ext
-source $HOME/.vimrc.ext
+silent! source $HOME/.vimrc.ext

@@ -31,18 +31,9 @@ prepare_git (){
     git config --global user.email "\"$git_email\""
 }
 
-install_monaco_font_ubuntu (){
-    echo -e "${COLOR_GREEN}Install monaco font?(y/n, default: n)${COLOR_NONE}"
-
-    if [[ "$(yes_or_no)" == "yes" ]]; then
-        sh -c "$(curl -fsSL https://raw.github.com/cstrap/monaco-font/master/install-font-ubuntu.sh )"
-    fi
-}
-
 init_debian (){
     sudo apt update
     install_package "build-essential" "curl" "net-tools"
-    install_monaco_font_ubuntu
     prepare_git
 }
 

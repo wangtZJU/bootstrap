@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -e
 cd `dirname $0`
 source utils.sh
 
@@ -7,6 +7,12 @@ detect_platform
 
 prepare_git (){
     install_package "git"
+    echo "Configure git?(y/n, default: n)"
+
+    if [[ "$(yes_or_no)" == "no" ]]; then
+        return 0
+    fi
+
     confirm=""
 
     while [[ "$confirm" != [yY] ]]; do
@@ -27,8 +33,8 @@ prepare_git (){
 
 init_debian (){
     sudo apt update
+    install_package "build-essential" "curl" "net-tools"
     prepare_git
-    install_package "build-essential"
 }
 
 init_osx (){

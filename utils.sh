@@ -24,9 +24,6 @@ detect_platform (){
 }
 
 install_package (){
-    package=$1
-    version=$2
-
     if [[ -z "${os_platform}" ]]; then
         detect_platform
     fi
@@ -38,11 +35,7 @@ install_package (){
 
     case $os_platform in
         debian )
-            if [[ -z "${version}" ]]; then
-                sudo apt install -yqq $package
-            else
-                sudo apt install -yqq $package=$version
-            fi
+            sudo apt install -yqq "$@"
             ;;
         osx )
             # TODO
@@ -50,3 +43,26 @@ install_package (){
     esac
 
 }
+
+yes_or_no (){
+    if [[ -n "$1" ]]; then
+        defval="yes"
+    else
+        defval="no"
+    fi
+
+    read yes_or_no
+
+    case $yes_or_no in
+        "" )
+            echo $defval
+            ;;
+        y | Y )
+            echo "yes"
+            ;;
+        *)
+            echo "no"
+            ;;
+    esac
+}
+

@@ -26,7 +26,7 @@ check_platform (){
     fi
 
     if [[ $os_platform == "unknown" ]]; then
-        echo "unknown platform found"
+        echo -e "${COLOR_RED}unknown platform found${COLOR_NONE}"
         exit 1
     fi
 }
@@ -48,11 +48,11 @@ install_homebrew_cask (){
     check_platform
 
     if [ "${os_platform}" != "osx" ]; then
-        echo "Not OSX platform!"
+        echo "${COLOR_RED}not osx platform!${COLOR_NONE}"
         exit 1
     fi
 
-    brew cask install "$@"
+    brew install --cask "$@"
 }
 
 yes_or_no (){

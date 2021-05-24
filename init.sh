@@ -4,7 +4,7 @@ cd `dirname $0`
 source utils.sh
 
 configure_git (){
-    echo -e "${COLOR_GREEN}Configure git?(y/n, default: n)${COLOR_NONE}"
+    echo -e "${COLOR_BLUE}Configure git?(y/n, default: n)${COLOR_NONE}"
 
     if [[ "$(yes_or_no)" == "no" ]]; then
         return 0
@@ -18,8 +18,8 @@ configure_git (){
         read -p "Input your git email: " git_email
 
         while [[ "$confirm" != [yYnN] ]]; do
-            echo -e "Your name is${COLOR_LIGHT_RED} ${git_name}${COLOR_NONE}, " \
-                    "your email is${COLOR_LIGHT_RED} ${git_email}${COLOR_NONE}, confirm? (y/n)"
+            echo -e "Your name is${COLOR_YELLOW} ${git_name}${COLOR_NONE}, " \
+                    "email is${COLOR_YELLOW} ${git_email}${COLOR_NONE}, confirm? (y/n)"
             read confirm
         done
     done

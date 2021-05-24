@@ -3,10 +3,7 @@ set -e
 cd `dirname $0`
 source utils.sh
 
-detect_platform
-
-prepare_git (){
-    install_package "git"
+configure_git (){
     echo -e "${COLOR_GREEN}Configure git?(y/n, default: n)${COLOR_NONE}"
 
     if [[ "$(yes_or_no)" == "no" ]]; then
@@ -33,22 +30,17 @@ prepare_git (){
 
 init_debian (){
     sudo apt update
-    install_package "build-essential" "curl" "net-tools"
-    prepare_git
+    install_package "build-essential" "git" "curl" "net-tools"
+    configure_git
 }
 
 init_osx (){
-    # TODO: install homebrew
-    :;
+    # install homebrew
+    if ! which brew 1>/dev/null; then
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    fi
+
+    configure_git
 }
 
-case $os_platform in
-    debian)
-        init_debian
-        ;;
-    osx)
-        init_osx
-        ;;
-    *)
-        echo "unsupport platform"
-esac
+exec_platform_specific_func init

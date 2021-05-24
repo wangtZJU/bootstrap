@@ -4,6 +4,4 @@
 - If `detect_platform` doesn't work correctly, set the environment manually: `export os_platform=[ osx | debian ]`
 
 # TODO
-- implement `init.sh`
-- implement `utils.sh`
 

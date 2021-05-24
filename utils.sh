@@ -6,8 +6,11 @@ COLOR_LIGHT_RED='\033[1;31m'
 COLOR_NONE='\033[0m'
 
 # set `os_platform` manually if this doesn't work
+check_platform (){
+    if [[ -n "${os_platform}" ]]; then
+        return 0
+    fi
 
-detect_platform (){
     os_platform="unknown"
 
     if [[ "$OSTYPE" == "linux"* ]]; then
@@ -21,30 +24,40 @@ detect_platform (){
     elif [[ "$OSTYPE" == "darwin"* ]]; then
         os_platform="osx"
     fi
+
+    if [[ $os_platform == "unknown" ]]; then
+        echo "unknown platform found"
+        exit 1
+    fi
 }
 
 install_package (){
-    if [[ -z "${os_platform}" ]]; then
-        detect_platform
-    fi
-
-    if [ "${os_platform}" == "unknown" ]; then
-        echo "Unsupport platform!"
-        exit 1
-    fi
+    check_platform
 
     case $os_platform in
         debian )
             sudo apt install -yqq "$@"
             ;;
         osx )
-            # TODO
+            brew install "$@"
             ;;
     esac
+}
 
+install_homebrew_cask (){
+    check_platform
+
+    if [ "${os_platform}" != "osx" ]; then
+        echo "Not OSX platform!"
+        exit 1
+    fi
+
+    brew cask install "$@"
 }
 
 yes_or_no (){
+    local defval
+
     if [[ -n "$1" ]]; then
         defval="yes"
     else
@@ -64,5 +77,11 @@ yes_or_no (){
             echo "no"
             ;;
     esac
+}
+
+exec_platform_specific_func (){
+    local func=$1
+    check_platform
+    eval "${func}_${os_platform}"
 }
 

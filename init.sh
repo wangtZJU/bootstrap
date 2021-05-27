@@ -26,11 +26,12 @@ configure_git (){
 
     git config --global user.name "\"$git_name\""
     git config --global user.email "\"$git_email\""
+    git config --global pull.ff only
 }
 
 init_debian (){
     sudo apt update
-    install_package "build-essential" "git" "curl" "net-tools"
+    install_package "build-essential" "git" "curl" "net-tools" "findutils"
     configure_git
 }
 

@@ -31,7 +31,8 @@ configure_git (){
 
 init_debian (){
     sudo apt update
-    install_package "build-essential" "git" "curl" "net-tools" "findutils"
+    install_package "build-essential" "git" "curl" "net-tools" "findutils" \
+        "python" "python-pip"
     configure_git
 }
 

@@ -63,11 +63,13 @@ configure_profile0 (){
         echo -e "${COLOR_YELLOW}~/.profile0 already exists, overwrite?${COLOR_NONE}"
         yes_or_no "no"
 
-        if [[ $yn_choice == "yes" ]]; then
+        if  [ $yn_choice == "yes" ]; then
             mv "$HOME/.profile0" "$HOME/.profile0.bak"
             cp profile0 "$HOME/.profile0"
             echo -e "${COLOR_GREEN}Move old ~/.profile0 to ~/.profile0.bak${COLOR_NONE}"
         fi
+    else
+        cp profile0 "$HOME/.profile0"
     fi
 
     if ! grep -q 'source $HOME/.profile0' "$HOME/.bashrc" 2>/dev/null ; then

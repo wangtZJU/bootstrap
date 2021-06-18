@@ -1,9 +1,9 @@
 export PATH=$PATH:$HOME/Utils/bin
 
 import_env(){
-    if [[ ! -f "$HOME/util/env/$1" ]]; then
+    if [[ ! -f "$HOME/Utils/env/$1" ]]; then
         echo "env file not found"
     else
-        source "$HOME/util/env/$1"
+        source "$HOME/Utils/env/$1"
     fi
 }

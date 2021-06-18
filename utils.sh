@@ -1,7 +1,8 @@
 COLOR_RED='\033[0;31m'
 COLOR_YELLOW='\033[1;33m'
 COLOR_GREEN='\033[0;32m'
-COLOR_BLUE='\033[0;34m'
+COLOR_BLUE='\033[1;34m'
+COLOR_CYAN='\033[0;36m'
 COLOR_LIGHT_RED='\033[1;31m'
 COLOR_NONE='\033[0m'
 
@@ -31,8 +32,50 @@ check_platform (){
     fi
 }
 
+yes_or_no (){
+    defval=$1
+    prompt=$2
+
+    if [ $defval != "yes" ] && [ $defval != "no" ]; then
+        echo "${COLOR_RED}defval is illegal!${COLOR_NONE}"
+        exit 1
+    fi
+
+    if [[ ! -z $prompt ]]; then
+        echo -e "${COLOR_BLUE}${prompt}${COLOR_NONE}"
+    fi
+
+    read yes_or_no
+
+    case $yes_or_no in
+        "" )
+            yn_choice=$defval
+            ;;
+        y | Y )
+            yn_choice="yes"
+            ;;
+        *)
+            yn_choice="no"
+            ;;
+    esac
+}
+
+
 install_package (){
     check_platform
+
+    if [ $os_platform == "debian" ] && [ ! -z $not_sudo_confirm ]; then
+        not_sudo_confirm=1
+        set +e
+        if ! sudo -v 2>/dev/null ; then
+            yes_or_no "yes" "Not a sudo user, abort process?(y/n)"
+
+            if [[ $yn_choice == "yes" ]]; then
+                exit 1
+            fi
+        fi
+        set -e
+    fi
 
     case $os_platform in
         debian )
@@ -53,30 +96,6 @@ install_homebrew_cask (){
     fi
 
     brew install --cask "$@"
-}
-
-yes_or_no (){
-    local defval
-
-    if [[ -n "$1" ]]; then
-        defval="yes"
-    else
-        defval="no"
-    fi
-
-    read yes_or_no
-
-    case $yes_or_no in
-        "" )
-            echo $defval
-            ;;
-        y | Y )
-            echo "yes"
-            ;;
-        *)
-            echo "no"
-            ;;
-    esac
 }
 
 exec_platform_specific_func (){

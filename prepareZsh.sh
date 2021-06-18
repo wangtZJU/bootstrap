@@ -9,10 +9,9 @@ if [[ -z "$ZSH" ]]; then
     sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
 
-cp zshrc.local $HOME/.zshrc.local
+yes_or_no "no" "Change shell?(y/n, default: n)"
 
-if ! grep -q 'source $HOME/.zshrc.local' "$HOME/.zshrc"; then
-    echo 'source $HOME/.zshrc.local' >> $HOME/.zshrc
+if [[ "$yn_choice" == "yes" ]]; then
+    chsh -s /bin/zsh
 fi
 
-chsh -s /bin/zsh

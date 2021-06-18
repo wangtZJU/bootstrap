@@ -4,9 +4,9 @@ cd `dirname $0`
 source utils.sh
 
 configure_git (){
-    echo -e "${COLOR_BLUE}Configure git?(y/n, default: n)${COLOR_NONE}"
+    yes_or_no "no" "Configure git?(y/n, default: n)"
 
-    if [[ "$(yes_or_no)" == "no" ]]; then
+    if [[ "$yn_choice" == "no" ]]; then
         return 0
     fi
 
@@ -18,8 +18,8 @@ configure_git (){
         read -p "Input your git email: " git_email
 
         while [[ "$confirm" != [yYnN] ]]; do
-            echo -e "Your name is${COLOR_YELLOW} ${git_name}${COLOR_NONE}, " \
-                    "email is${COLOR_YELLOW} ${git_email}${COLOR_NONE}, confirm? (y/n)"
+            echo -e "Your name is${COLOR_CYAN} ${git_name}${COLOR_NONE}, " \
+                    "email is${COLOR_CYAN} ${git_email}${COLOR_NONE}, confirm? (y/n)"
             read confirm
         done
     done
@@ -29,10 +29,56 @@ configure_git (){
     git config --global pull.ff only
 }
 
-init_debian (){
+configure_basic_packages_debian (){
+    yes_or_no "no" "Configure basic packages?(y/n, default: n)"
+
+    if [[ "$yn_choice" == "no" ]]; then
+        return 0
+    fi
+
     sudo apt update
     install_package "build-essential" "git" "curl" "net-tools" "findutils" \
         "python" "python-pip"
+}
+
+configure_utils (){
+    yes_or_no "no" "Configure utils?(y/n, default: n)"
+
+    if [[ "$yn_choice" == "no" ]]; then
+        return 0
+    fi
+
+    mkdir -p $HOME/Utils/bin
+    mkdir -p $HOME/Utils/env
+}
+
+configure_profile0 (){
+    yes_or_no "no" "Configure profile0 file?(y/n, default: n)"
+
+    if [[ "$yn_choice" == "no" ]]; then
+        return 0
+    fi
+
+    if [[ -f "$HOME/.profile0" ]]; then
+        echo -e "${COLOR_YELLOW}profile0 file already exists, move it to ~/.profile0.bak${COLOR_NONE}"
+        mv "$HOME/.profile0" "$HOME/.profile0.bak" 
+    fi
+
+    cp profile0 "$HOME/.profile0" 
+
+    if ! grep -q 'source $HOME/.profile0' "$HOME/.bashrc" 2>/dev/null ; then
+        echo 'source $HOME/.profile0' >> $HOME/.bashrc
+    fi
+
+    if ! grep -q 'source $HOME/.profile0' "$HOME/.zshrc" 2>/dev/null ; then
+        echo 'source $HOME/.profile0' >> $HOME/.zshrc
+    fi
+}
+
+init_debian (){
+    configure_basic_packages_debian
+    configure_utils
+    configure_profile0
     configure_git
 }
 

@@ -10,3 +10,5 @@
 - Profiles -> Keys -> Key Mappings -> Add: Option + Shift + <- => send hex 0x1 (home key)
 - Profiles -> Keys -> Key Mappings -> Add: Option + Shift + -> => send hex 0x5 (end key)
 
+# Shell
+- Add `bindkey \^U backward-kill-line` to `~/.zshrc`

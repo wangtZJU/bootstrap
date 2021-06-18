@@ -60,26 +60,36 @@ yes_or_no (){
     esac
 }
 
+install_package_debian (){
+    if [ ! -z $skip_install ]; then
+        echo -e "${COLOR_GREEN}Skip install packages: $@ ${COLOR_NONE}"
+        return 0
+    fi
 
-install_package (){
-    check_platform
-
-    if [ $os_platform == "debian" ] && [ -z $not_sudo_check ]; then
+    if [ -z $not_sudo_check ]; then
         not_sudo_check=1
         set +e
         if ! sudo -v 2>/dev/null ; then
-            yes_or_no "yes" "Not a sudo user, abort process?(y/n)"
+            yes_or_no "no" "${COLOR_YELLOW}Not a sudo user, skip package install? ${COLOR_NONE}"
 
             if [[ $yn_choice == "yes" ]]; then
-                exit 1
+                skip_install=1
+                return 0
+            else
+                exit 0
             fi
         fi
         set -e
     fi
+    sudo apt install -yqq "$@"
+}
+
+install_package (){
+    check_platform
 
     case $os_platform in
         debian )
-            sudo apt install -yqq "$@"
+            install_package_debian "$@"
             ;;
         osx )
             brew install "$@"

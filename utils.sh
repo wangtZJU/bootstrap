@@ -64,8 +64,8 @@ yes_or_no (){
 install_package (){
     check_platform
 
-    if [ $os_platform == "debian" ] && [ ! -z $not_sudo_confirm ]; then
-        not_sudo_confirm=1
+    if [ $os_platform == "debian" ] && [ -z $not_sudo_check ]; then
+        not_sudo_check=1
         set +e
         if ! sudo -v 2>/dev/null ; then
             yes_or_no "yes" "Not a sudo user, abort process?(y/n)"

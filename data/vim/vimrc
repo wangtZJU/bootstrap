@@ -9,24 +9,11 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
+Plugin 'sheerun/vim-polyglot'
 Plugin 'rafi/awesome-vim-colorschemes'
-" Plugin 'fholgado/minibufexpl.vim'
-" Plugin 'majutsushi/tagbar'
-"Plugin 'vim-syntastic/syntastic'
-Plugin 'nvie/vim-flake8'
-" Plugin 'sheerun/vim-polyglot'
 Plugin 'Chiel92/vim-autoformat'
-Plugin 'derekwyatt/vim-scala'
-" Plugin 'SirVer/ultisnips'
-" Plugin 'honza/vim-snippets'
-" Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-airline/vim-airline'
 Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
-Plugin 'vim-scripts/vim-auto-save'
-Plugin 'hashivim/vim-terraform'
-" Plugin 'saltstack/salt-vim'
-
 
 call vundle#end()
 "" Vundle Plugin
@@ -130,15 +117,6 @@ nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
 noremap <LEADER><CR> :noh<CR>
-nnoremap <LEADER>1 1gt
-nnoremap <LEADER>2 2gt
-nnoremap <LEADER>3 3gt
-nnoremap <LEADER>4 4gt
-nnoremap <LEADER>5 5gt
-nnoremap <LEADER>6 6gt
-nnoremap <LEADER>7 7gt
-nnoremap <LEADER>8 8gt
-nnoremap <LEADER>9 9gt
 nnoremap <LEADER>y "*y
 nnoremap <LEADER>p "*p
 vnoremap <LEADER>y "*y
@@ -179,68 +157,23 @@ let g:omni_sql_no_default_maps = 1
 
 "" plugin configuration
 " NERDTree
-noremap <F1> :NERDTreeToggle<CR>
-inoremap <F1> <Esc>:NERDTreeToggle<CR>
-vnoremap <F1> <Esc>:NERDTreeToggle<CR>
+noremap <LEADER>1 :NERDTreeToggle<CR>
+inoremap <LEADER>1 <Esc>:NERDTreeToggle<CR>
+vnoremap <LEADER>1 <Esc>:NERDTreeToggle<CR>
 
 " Close Vim if the only window left open is NERDTree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " NERDTree
-
-" MiniBufExpl
-noremap <Leader>mbt :MBEToggle<cr>
-hi MBEVisibleActiveNormal   guifg=#ffffff guibg=#afd700 ctermfg=15 ctermbg=148
-hi MBEVisibleActiveChanged  guifg=#ffffff guibg=#af00af ctermfg=15 ctermbg=127
-" MiniBufExpl
-
-" Tagbar
-" noremap <F2> :TagbarToggle<CR>
-" inoremap <F2> <Esc>:TagbarToggle<CR>
-" vnoremap <F2> <Esc>:TagbarToggle<CR>
-" Tagbar
 
 " Autoformat
 let g:formatdef_sql = '"sqlformat --reindent --keywords upper --identifiers lower -"'
 let g:formatters_sql = ['sql']
 " Autoformat
 
-" syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
-
-nnoremap <LEADER>sc :SyntasticCheck<CR>
-" syntastic
-
-" Ultisnip
-" let g:UltiSnipsExpandTrigger="<C-Right>"
-" let g:UltiSnipsJumpForwardTrigger="<C-Right>"
-" let g:UltiSnipsJumpBackwardTrigger="<C-Left>"
-" Ultisnip
-
-" YouCompleteMe
-set completeopt-=preview
-
-let g:ycm_collect_identifiers_from_tags_files = 1 " Let YCM read tags from Ctags file
-let g:ycm_use_ultisnips_completer = 1 " Default 1, just ensure
-let g:ycm_seed_identifiers_with_syntax = 1 " Completion for programming language's keyword
-let g:ycm_complete_in_comments = 1 " Completion in comments
-let g:ycm_complete_in_strings = 1 " Completion in string
-
-nnoremap <F3> :YcmCompleter GoTo<CR>
-nnoremap <LEADER>gg :YcmCompleter GoTo<CR>
-" YouCompleteMe
-
 " vim-airline
 let g:airline#extensions#tabline#enabled = 1
 " vim-airline
 "" plugin configuration
-
 
 "" Add custom config in ~/.vimrc.ext
 silent! source $HOME/.vimrc.ext

@@ -1,0 +1,45 @@
+#!/bin/bash
+if ! which tmux >/dev/null; then
+    echo "tmux not found!"
+    exit 1
+fi
+
+if [ "$#" -gt 0 ]; then
+    exec tmux $@
+fi
+
+exist_sessions=( $(tmux ls -F '#S' 2>/dev/null) )
+
+if [ ${#exist_sessions[@]} -eq 0 ]; then
+    exec tmux
+fi
+
+if [ ${#exist_sessions[@]} -eq 1 ]; then
+    exec tmux at -t ${exist_sessions[0]}
+fi
+
+echo "Multiple session exists" 
+index=0
+for sid in "${exist_sessions[@]}"; do
+    wid=`tmux list-windows -t $sid -F '#{window_id}' | head -1`
+    sinfo=`tmux list-windows -t "$wid" -F 'created: #{t:session_created}, last attach: #{t:session_last_attached}' | head -1`
+    echo "$index - $sid, $sinfo"
+    index=$((index+1))
+done
+read -p "choose 1 session to attach(default: ${exist_sessions[0]}): " selected
+
+if [ -z "$selected" ]; then
+    selected=0
+fi
+
+re='^[0-9]+$'
+if ! [[ $selected =~ $re ]] ; then
+   echo "error: not a number" >&2; exit 1
+fi
+
+if [ $selected -ge ${#exist_sessions[@]} ]; then
+   echo "error: illegal session index" >&2; exit 1
+fi 
+
+exec tmux at -t "${exist_sessions[$selected]}"
+

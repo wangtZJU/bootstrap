@@ -18,7 +18,7 @@ if [ ${#exist_sessions[@]} -eq 1 ]; then
     exec tmux at -t ${exist_sessions[0]}
 fi
 
-echo "Multiple session exists" 
+echo "Multiple session exists"
 index=0
 for sid in "${exist_sessions[@]}"; do
     wid=`tmux list-windows -t $sid -F '#{window_id}' | head -1`
@@ -39,7 +39,7 @@ fi
 
 if [ $selected -ge ${#exist_sessions[@]} ]; then
    echo "error: illegal session index" >&2; exit 1
-fi 
+fi
 
 exec tmux at -t "${exist_sessions[$selected]}"
 

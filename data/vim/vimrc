@@ -134,7 +134,7 @@ nnoremap ]<SPACE>  :<C-U>put =repeat(nr2char(10), v:count1)<CR>
 colo molokai
 let g:molokai_original = 1
 let g:rehash256 = 1
-set guifont=Source\ Code\ Variable:h18
+highlight Visual cterm=bold ctermbg=Blue ctermfg=NONE
 
 if empty($TMUX)
   let &t_SI = "\<Esc>]50;CursorShape=1\x7"

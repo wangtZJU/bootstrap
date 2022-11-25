@@ -1,0 +1,5 @@
+set auto-load safe-path /
+set auto-load local-gdbinit on
+set print pretty on
+set print object on
+

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+TMUX_SESSION_NAME=xx
+
+## create session/window/panes
+tmux kill-session -t $TMUX_SESSION_NAME 2>/dev/null
+tmux new-session -s $TMUX_SESSION_NAME -d
+tmux new-window -t $TMUX_SESSION_NAME -d # 2
+#### split-window [-h | -v] [-p percentage]
+tmux split-window -t $TMUX_SESSION_NAME:2.1
+
+## ssh to server/authenticate/cd working dir
+#declare -a arr=(
+#$TMUX_SESSION_NAME:1.1
+#$TMUX_SESSION_NAME:1.2
+#$TMUX_SESSION_NAME:2.1
+#$TMUX_SESSION_NAME:2.2
+#$TMUX_SESSION_NAME:3.1
+#$TMUX_SESSION_NAME:4.1
+#$TMUX_SESSION_NAME:5.1
+#)
+
+#for (( i=0; i<${#arr[@]}; i++ )); do
+#    tmux send-keys -t ${arr[$i]} "ssh opsbox" Enter
+#    sleep 0.2
+#    tmux send-keys -t ${arr[$i]} "./ad_projection" Enter
+#done
+
+## attach window
+#tmux -t $TMUX_SESSION_NAME select-window -t $TMUX_SESSION_NAME:1.1
+#tmux attach -t $TMUX_SESSION_NAME

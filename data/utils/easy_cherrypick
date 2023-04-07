@@ -1,0 +1,49 @@
+#!/bin/bash
+set -e
+
+# Reset
+Color_Off='\033[0m'       # Text Reset
+
+# Regular Colors
+Black='\033[0;30m'        # Black
+Red='\033[0;31m'          # Red
+Green='\033[0;32m'        # Green
+Yellow='\033[0;33m'       # Yellow
+Blue='\033[0;34m'         # Blue
+Purple='\033[0;35m'       # Purple
+Cyan='\033[0;36m'         # Cyan
+White='\033[0;37m'        # White
+
+if [[ -n $(git status --porcelain --ignore-submodules --untracked-files=no) ]]; then
+    echo -e "${Red}Local repo is dirty${Color_Off}";
+    exit 1
+fi
+
+cp_src=$1
+cp_tgt=$2
+cp_commit_size=${3:-1}
+
+if [ -z "$cp_src" ]; then
+    echo -e "${Red}cherrypick source is empty${Color_Off}"
+    exit 1
+fi
+
+if [ -z "$cp_tgt" ]; then
+    echo -e "${Red}cherrypick target is empty${Color_Off}"
+    exit 1
+fi
+
+git checkout ${cp_tgt}
+
+backup_branch="${cp_tgt}_$(md5 -s `uuidgen` | awk -F= '{print $2}' | cut -c 2-15)"
+echo -e "${Yellow}Backup branch: ${backup_branch}${Color_Off}"
+git branch ${backup_branch}
+
+commit_hashes=( $(git log --pretty=format:"%H" -${cp_commit_size} "${cp_src}") )
+
+for (( idx=${#commit_hashes[@]}-1 ; idx>=0 ; idx-- )) ; do
+    commit_hash="${commit_hashes[idx]}"
+    git cherry-pick ${commit_hash}
+    echo -e "${Green}$commit_hash is cherry-picked, $idx commits remains to cherry-pick${Color_Off}"
+done
+

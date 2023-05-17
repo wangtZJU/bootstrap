@@ -1,0 +1,7 @@
+alias gd="git diff"
+alias gdc="git diff --cached"
+alias gdw='git diff --word-diff=color'
+alias gdwc='git diff --cached --word-diff=color'
+alias gdt="git difftool -y --tool=vimdiff"
+alias gdtc="git difftool -y --cached --tool=vimdiff"
+

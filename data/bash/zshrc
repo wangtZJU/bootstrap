@@ -1,0 +1,14 @@
+source ~/.profile0
+
+export HISTFILESIZE=1000000000
+export HISTSIZE=1000000000
+setopt hist_find_no_dups
+setopt no_share_history
+setopt inc_append_history
+
+alias import_history='fc -RI'
+
+__git_files () {
+    _wanted files expl 'local files' _files
+}
+

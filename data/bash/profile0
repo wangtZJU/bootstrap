@@ -34,6 +34,7 @@ gchdv(){
 
 ## Aliases
 alias gclm='git commit --reuse-message=HEAD'
+alias gps='git push'
 alias gpsup='git push origin HEAD --set-upstream'
 alias gd="git diff"
 alias gdc="git diff --cached"

@@ -2,13 +2,49 @@
 
 ## Functions
 
+###### Verbose version of grl
+grlv(){
+    git rev-list --reverse --topo-order --ancestry-path $1 \
+      | xargs -n 1 git --no-pager log -1 --oneline \
+      --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
+}
+
+###### Find direct children of a commit/branch
+###### param1 - the branch/commit that we want to find children for
+###### param2 - the branch/commit to rev-list to find children
+gchd(){
+    ahash=$(git rev-parse ${1}^{commit}) # in case A is a branch or tag name, for instance
+    for hash in $(git rev-list --ancestry-path $ahash..${2}); do
+        if git rev-parse $hash^@ | grep -q $ahash; then
+            echo $hash
+        fi
+    done
+}
+
+###### Verbose version of gchd
+gchdv(){
+    ahash=$(git rev-parse ${1}^{commit}) # in case A is a branch or tag name, for instance
+    for hash in $(git rev-list --ancestry-path $ahash..${2}); do
+        if git rev-parse $hash^@ | grep -q $ahash; then
+            echo $hash | xargs -n 1 git --no-pager log -1 --oneline \
+                --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
+        fi
+    done
+}
+
 ## Aliases
+alias gclm='git commit --reuse-message=HEAD'
+alias gpsup='git push origin HEAD --set-upstream'
 alias gd="git diff"
 alias gdc="git diff --cached"
 alias gdw='git diff --word-diff=color'
 alias gdwc='git diff --cached --word-diff=color'
 alias gdt="git difftool -y --tool=vimdiff"
 alias gdtc="git difftool -y --cached --tool=vimdiff"
+alias gl='git log --stat'
+alias glg='git log --stat'
+alias glgg="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'"
+alias grl="git rev-list --reverse --topo-order --ancestry-path"
 
 ##After this line, put your customized commands
 ######

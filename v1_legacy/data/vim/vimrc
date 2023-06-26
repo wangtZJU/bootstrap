@@ -116,6 +116,8 @@ nnoremap * *zz
 nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
+nnoremap j gjzz
+nnoremap k gkzz
 noremap <LEADER><CR> :noh<CR>
 nnoremap <LEADER>y "*y
 nnoremap <LEADER>p "*p

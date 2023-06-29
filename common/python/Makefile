@@ -3,3 +3,7 @@
 
 .inst-user-py: .inst-venv
 	./install-user-py.sh
+
+## this should be done after installing user py
+.inst-user-utils:
+	pip install jinja-cli clang-format

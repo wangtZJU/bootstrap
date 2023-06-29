@@ -13,5 +13,5 @@ fi
 
 virtualenv -p ${PY_EXEC} ${USER_PY_HOME}
 
-echo -e "Add ${COLOR_GREEN}VIRTUAL_ENV_DISABLE_PROMPT=1 source ${USER_PY_HOME}/bin/active${COLOR_NONE} into your .zshrc/.bashrc"
+echo -e "Add ${COLOR_GREEN}VIRTUAL_ENV_DISABLE_PROMPT=1 source ${USER_PY_HOME}/bin/activate${COLOR_NONE} into your .zshrc/.bashrc"
 

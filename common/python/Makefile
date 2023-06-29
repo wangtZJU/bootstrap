@@ -6,4 +6,4 @@
 
 ## this should be done after installing user py
 .inst-user-utils:
-	pip install jinja-cli clang-format
+	pip install ipython jinja-cli clang-format

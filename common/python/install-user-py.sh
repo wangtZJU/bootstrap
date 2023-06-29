@@ -2,7 +2,7 @@
 cd `dirname $0`
 source ../common.sh
 
-PY_VERSION="3.9"
+PY_VERSION="${PY_VERSION:-3.9}"
 PY_EXEC="python${PY_VERSION}"
 USER_PY_HOME="~/.py${PY_VERSION}"
 

@@ -1,0 +1,28 @@
+{
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "acid-gitlab-mr.accessToken": "NyCN3RtJhtxx-m9v6x-2",
+    "acid-gitlab-mr.gitlabServer": "https://code.byted.org/",
+    "C_Cpp.intelliSenseEngine": "Disabled",
+    "cmake.ignoreCMakeListsMissing": true,
+    "debug.focusWindowOnBreak": false,
+    "debug.toolBarLocation": "docked",
+    "diffEditor.ignoreTrimWhitespace": false,
+    "diffEditor.wordWrap": "on",
+    "editor.fontFamily": "Monaco, Monaco, 'Courier New', monospace",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "modifications",
+    "editor.inlayHints.enabled": "off",
+    "editor.minimap.enabled": false,
+    "explorer.autoReveal": false,
+    "explorer.confirmDragAndDrop": false,
+    "files.trimTrailingWhitespace": true,
+    "gitlens.advanced.fileHistoryFollowsRenames": true,
+    "gitlens.advanced.fileHistoryShowAllBranches": false,
+    "security.workspace.trust.untrustedFiles": "open",
+    "terminal.integrated.scrollback": 100000,
+    "update.mode": "manual",
+    "window.zoomLevel": 1,
+    "workbench.colorTheme": "Default Dark+ Experimental",
+}

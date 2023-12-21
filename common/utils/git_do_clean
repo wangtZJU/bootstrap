@@ -54,13 +54,13 @@ if [[ $dry_run = "1" ]]; then
     for br in "${branches_to_be_removed[@]}"; do
         echo -e "${COLOR_YELLOW}  " $br " ${COLOR_NONE}"
     done
-    echo -e "Run${COLOR_RED} git_do_clean --no-dry-run ${COLOR_NONE} to remove stale branches"
+    echo -e "Run${COLOR_RED} git_do_clean --no-dry-run ${COLOR_NONE}to take effect"
 else
     echo -e "${COLOR_GREEN}Delete branches${COLOR_NONE}"
     for br in "${branches_to_be_removed[@]}"; do
         git branch -D $br
     done
-    echo "${COLOR_GREEN}Run git gc${COLOR_NONE}"
+    echo -e "${COLOR_GREEN}Run git gc${COLOR_NONE}"
     git gc --aggressive
     echo "Done"
 fi

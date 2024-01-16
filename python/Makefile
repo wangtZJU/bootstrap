@@ -1,3 +1,5 @@
+SHELL = $(PWD)/../shell
+
 .inst-venv:
 	pip3 install --user virtualenv
 

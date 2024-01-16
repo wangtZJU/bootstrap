@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# this file should be sourced
 export COLOR_RED='\033[0;31m'
 export COLOR_YELLOW='\033[1;33m'
 export COLOR_GREEN='\033[0;32m'
@@ -23,4 +24,7 @@ check_platform (){
 }
 
 check_platform
+
+export LOCAL_BIN_PATH="${HOME}/local/bin"
+mkdir -p $LOCAL_BIN_PATH
 

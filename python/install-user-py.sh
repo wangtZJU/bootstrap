@@ -1,6 +1,6 @@
 #!/bin/bash
 cd `dirname $0`
-source ../common.sh
+source ../env.bash
 
 PY_VERSION="${PY_VERSION:-3.9}"
 PY_EXEC="python${PY_VERSION}"

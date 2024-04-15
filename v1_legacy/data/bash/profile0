@@ -46,6 +46,7 @@ alias gl='git log --stat'
 alias glg='git log --stat'
 alias glgg="git log --graph --pretty='%Cred%h%Creset -%C(auto)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'"
 alias grl="git rev-list --reverse --topo-order --ancestry-path"
+alias vimdiff="vimdiff -c 'windo set wrap'"
 
 ##After this line, put your customized commands
 ######

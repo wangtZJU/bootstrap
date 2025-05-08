@@ -1,4 +1,5 @@
 SHELL = $(PWD)/../shell
+PYTHON_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
 .inst-venv:
 	pip3 install --user virtualenv

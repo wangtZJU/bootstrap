@@ -1,8 +1,9 @@
 SHELL = $(PWD)/../shell
 OSX_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
-include ../sh/Makefile
 include ../common/Makefile
+include ../sh/Makefile
+include ../vim/Makefile
 
 .osx-init:
 	$(OSX_DIR)/init.sh
@@ -19,7 +20,8 @@ osx-basic-install: \
 	.osx-init \
 	.common-install-user-py \
 	.common-config-git \
-	.sh-shell-config
+	.sh-config \
+	.vim-config
 	@echo "OSX basic installed"
 
 osx-full-install: osx-basic-install .osx-inst-utils

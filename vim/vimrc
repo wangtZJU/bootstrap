@@ -63,6 +63,10 @@ set splitright             " Open new windows right of the current window.
 
 set report      =0         " Always report changed lines.
 
+" set textwidth=0
+" set wrapmargin=0
+set wrap
+
 " set foldmethod=syntax
 " set foldcolumn=3
 

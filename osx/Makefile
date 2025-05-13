@@ -15,9 +15,11 @@ include ../common/Makefile
 	brew install maccy
 	# brew install hammerspoon --cask
 
-osx-basic-install: .osx-init \
-					.common-install-user-py \
-					.common-config-git
+osx-basic-install: \
+	.osx-init \
+	.common-install-user-py \
+	.common-config-git \
+	.sh-sync-profile0
 	@echo "OSX basic installed"
 
 osx-full-install: osx-basic-install .osx-inst-utils

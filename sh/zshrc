@@ -1,4 +1,5 @@
 source ~/.profile0
+bindkey \^U backward-kill-line
 
 export HISTFILESIZE=1000000000
 export HISTSIZE=1000000000
@@ -10,5 +11,4 @@ __git_files () {
     _wanted files expl 'local files' _files
 }
 
-alias import_history='fc -RI'
-
+export DISABLE_MAGIC_FUNCTIONS=true

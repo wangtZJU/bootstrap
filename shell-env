@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# user level apps
+export LOCAL_PATH="${HOME}/local"
+export LOCAL_BIN_PATH="${LOCAL_PATH}/bin"
+mkdir -p $LOCAL_BIN_PATH
+
 # user level python
 PY_VERSION="${PY_VERSION:-3.13}"
 PY_EXEC="python${PY_VERSION}"
@@ -41,6 +46,3 @@ user_confirm (){
         exit 1
     fi
 }
-
-export LOCAL_BIN_PATH="${HOME}/local/bin"
-mkdir -p $LOCAL_BIN_PATH

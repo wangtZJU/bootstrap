@@ -2,7 +2,7 @@ SHELL = $(PWD)/../shell
 OSX_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
 include ../sh/Makefile
-include ../python/Makefile
+include ../common/Makefile
 
 .osx-init:
 	$(OSX_DIR)/init.sh

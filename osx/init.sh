@@ -13,5 +13,7 @@ fi
 # Python
 if ! which $PY_EXEC &>/dev/null; then
     echo "Installing $PY_EXEC..."
-    brew install $PY_EXEC
+    brew install "python@${PY_VERSION}"
 fi
+
+mkdir -p $HOME/Workspace

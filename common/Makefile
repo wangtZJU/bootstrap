@@ -6,3 +6,6 @@ COMMON_DIR := $(dir $(lastword $(MAKEFILE_LIST)))
 
 .common-config-git:
 	$(COMMON_DIR)/config-git.sh
+
+.common-install-py-utils:
+	pip install jinja-cli jq

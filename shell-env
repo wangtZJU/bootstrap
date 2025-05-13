@@ -57,7 +57,7 @@ insert_line (){
     target_file="$1"
     line="$2"
     touch "$target_file"
-    if ! grep -q "^$line$" ; then
+    if ! grep -q "^$line$" "$target_file" ; then
         echo >> "$target_file"
         echo "$line" >> "$target_file"
     fi

@@ -1,5 +1,7 @@
 ## Environments
 
+export PATH="${PATH}:${HOME}/local/bin"
+
 ## Functions
 
 ###### Verbose version of grl

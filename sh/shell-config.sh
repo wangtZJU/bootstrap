@@ -11,4 +11,4 @@ fi
 
 insert_file "profile0" "$HOME/.profile0" "##### DEFAULT START #####" "##### DEFAULT END #####"
 insert_file "zshrc" "$HOME/.zshrc" "##### DEFAULT ZSH SETTINGS START #####" "##### DEFAULT ZSH SETTINGS END #####"
-insert_line "$HOME/.bash_profile" "source $HOME/.profile0"
+insert_line "$HOME/.bashrc" "source $HOME/.profile0"

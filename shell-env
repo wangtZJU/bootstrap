@@ -53,18 +53,27 @@ user_confirm (){
     fi
 }
 
-sync_content (){
+insert_line (){
+    target_file="$1"
+    line="$2"
+    touch "$target_file"
+    if ! grep -q "^$line$" ; then
+        echo >> "$target_file"
+        echo "$line" >> "$target_file"
+    fi
+}
+
+insert_file (){
     source_file="$1"
     target_file="$2"
     start_marker="$3"
     end_marker="$4"
 
     [[ ! -f "$source_file" ]] && echo "Source file not found: $source_file" && exit 1
-    [[ ! -f "$target_file" ]] && echo "Target file not found: $target_file" && exit 1
-
+    touch "$target_file"
     cp $target_file "$target_file.bak"
 
-    if grep -q "$start_marker" "$target_file" && grep -q "$end_marker" "$target_file"; then
+    if grep -q "^$start_marker$" "$target_file" && grep -q "^$end_marker$" "$target_file"; then
         gawk "/^$start_marker$/,/^$end_marker$/ {
             if (/^$start_marker$/) {
                 print;

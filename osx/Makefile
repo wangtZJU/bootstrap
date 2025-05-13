@@ -19,7 +19,7 @@ osx-basic-install: \
 	.osx-init \
 	.common-install-user-py \
 	.common-config-git \
-	.sh-sync-profile0
+	.sh-shell-config
 	@echo "OSX basic installed"
 
 osx-full-install: osx-basic-install .osx-inst-utils

@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 # user level apps
 export LOCAL_PATH="${HOME}/local"
@@ -97,3 +96,12 @@ insert_file (){
         echo "$end_marker"; } >> "$target_file"
     fi
 }
+
+
+set -e
+
+if [ ! -z "$debug" ]; then
+    set -x
+fi
+
+

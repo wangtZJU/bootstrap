@@ -103,5 +103,3 @@ set -e
 if [ ! -z "$debug" ]; then
     set -x
 fi
-
-

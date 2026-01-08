@@ -18,7 +18,7 @@ else
     datecmd="date"
 fi
 
-BRANCH_EXPIRE_DAYS=${BRANCH_EXPIRE_DAYS:-30}
+BRANCH_EXPIRE_DAYS=${BRANCH_EXPIRE_DAYS:-180}
 PROTECTED_BRANCHES=${PROTECTED_BRANCHES:-master,main}
 
 IFS=',' read -r -a protected_branches_array <<< "$PROTECTED_BRANCHES"
@@ -29,7 +29,8 @@ branches_to_be_removed=()
 for br in `git branch | cut -c 3-`; do
     is_protected=0
     for pbr in "${protected_branches_array[@]}"; do
-        if [[ $br = $pbr ]]; then
+        pbr="^$pbr$"
+        if [[ $br =~ $pbr ]]; then
             is_protected=1;
         fi
     done
@@ -54,7 +55,7 @@ if [[ $dry_run = "1" ]]; then
     for br in "${branches_to_be_removed[@]}"; do
         echo -e "${COLOR_YELLOW}  " $br " ${COLOR_NONE}"
     done
-    echo -e "Run${COLOR_RED} git_do_clean --no-dry-run ${COLOR_NONE}to take effect"
+    echo -e "Run${COLOR_RED} git_gc --no-dry-run ${COLOR_NONE}to take effect"
 else
     echo -e "${COLOR_GREEN}Delete branches${COLOR_NONE}"
     for br in "${branches_to_be_removed[@]}"; do
